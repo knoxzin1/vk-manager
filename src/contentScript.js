@@ -1,5 +1,5 @@
 // Load options
-if (typeof chrome.storage !== "undefined") {
+if (typeof chrome.storage !== 'undefined') {
   chrome.storage.sync.get(null, function(items) {
     var actualCode = '(' + function(items) {
       window.vkManagerOptions = items;
