@@ -51,15 +51,25 @@ var overrideBoardUpdates = function() {
 overrideBoardUpdates();
 
 var discussionBoardRoute = function() {
-  // Update the "Discussion Board" to reload on clic
+  // Update the "Discussion Board" to reload on click
   var $discussionBoard = document.querySelector('.ui_crumb:last-child');
 
   if ($discussionBoard) {
     var $link = document.createElement('a');
     $link.setAttribute('class', 'ui_crumb');
-    $link.innerHTML = $discussionBoard.innerHTML;
+    $link.textContent = $discussionBoard.firstChild.textContent;
     $link.setAttribute('href', document.location.pathname);
     $link.setAttribute('onclick', 'return nav.go(this, event);');
+
+    if ($discussionBoard.childNodes.length >= 1) {
+      var $spanEl = document.createElement('span');
+      $spanEl.setAttribute('class', 'ui_crumb_count');
+
+      var $span = $discussionBoard.childNodes[1];
+
+      $spanEl.textContent = $span.textContent;
+      $link.appendChild($spanEl);
+    }
 
     $discussionBoard.parentNode.replaceChild($link, $discussionBoard);
   }
