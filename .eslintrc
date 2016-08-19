@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "globals": {
     "nav": true,
     "Board": true
@@ -6,7 +9,8 @@
   "env": {
     "browser": true,
     "webextensions": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "extends": ["eslint:recommended"],
   "rules": {

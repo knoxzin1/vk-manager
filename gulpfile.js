@@ -6,6 +6,6 @@ gulp.task('build', function() {
     '!./node_modules/**',
     '!./node_modules/',
     '!/src/**/*.test.js'
-  ], {dot: true})
+  ])
   .pipe(gulp.dest('./build'));
 });
