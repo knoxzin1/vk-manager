@@ -3,8 +3,12 @@
   "version": "2.0.0",
   "description": "",
   "scripts": {
+    "lint": "eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rodrigo Siqueira <knoxzin1@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.3.1"
+  }
 }
