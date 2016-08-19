@@ -1,0 +1,50 @@
+body {
+  background-color: #eee;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+body,
+select {
+  font-family: Lucida Grande, Arial, tahoma, verdana, sans-serif;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 400;
+  color: #3f3f3f;
+  margin: 40px 0
+}
+
+h2 {
+  font-size: 1.8em;
+  font-weight: 400;
+  color: #3f3f3f;
+  margin: 1em auto;
+  text-align: center
+}
+
+.content {
+  width: 800px;
+  height: 100%;
+  margin: auto;
+  padding: 1px 16px 16px 16px;
+  background-color: #fff;
+  box-shadow: 3px 3px 0px #ccc;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+input[type=checkbox] {
+  margin: 0 4px 0 0px;
+  height: 14px;
+  vertical-align: middle;
+}

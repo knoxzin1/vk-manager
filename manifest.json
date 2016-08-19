@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "name": "VK Manager",
+  "manifest_version": 2,
+
+  "default_locale": "pt_BR",
+  "description": "Extensão para o site vk.com",
+  "homepage_url": "https://github.com/knoxzin1/vk-manager",
+
+  "icons": {
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "src/options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://vk.com/*"],
+      "js": ["src/contentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": ["src/pageScript.js"],
+  "permissions": ["activeTab", "storage", "*://vk.com/*"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+}
