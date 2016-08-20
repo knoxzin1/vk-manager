@@ -15,7 +15,11 @@ Clone o repositório e instale as depêndencias
 
 Para gerar a extensão:
 
-`npm run build`
+`npm run build:chrome`
+
+ou
+
+`npm run build:firefox`
 
 ## Testes
 
