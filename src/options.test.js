@@ -55,6 +55,7 @@ describe('src/options.js', function() {
   it('should contain the form options', function() {
     // selenium will throw if the element is not present
     driver.findElement(webdriver.By.name('dontScrollPosts'));
+    driver.findElement(webdriver.By.name('dontPlayGifs'));
   });
 
   it('should save "dontScrollPosts" to chrome.storage', function(done) {
@@ -83,6 +84,37 @@ describe('src/options.js', function() {
     })
     .then(function(item) {
       assert.propertyVal(item, 'dontScrollPosts', false, 'should be false after second click');
+    })
+    .then(done)
+    .catch(done);
+  });
+
+  it('should save "dontPlayGifs" to chrome.storage', function(done) {
+
+    var dontPlayGifs = driver.findElement(webdriver.By.name('dontPlayGifs'));
+    dontPlayGifs.click();
+
+    driver.executeAsyncScript(function() {
+      var callback = arguments[arguments.length - 1];
+      chrome.storage.sync.get('dontPlayGifs', function(item) {
+        callback(item);
+      });
+    })
+    .then(function(item) {
+      assert.propertyVal(item, 'dontPlayGifs', true, 'should be true after first click');
+    })
+    .then(function() {
+      dontPlayGifs.click();
+
+      return driver.executeAsyncScript(function() {
+        var callback = arguments[arguments.length - 1];
+        chrome.storage.sync.get('dontPlayGifs', function(item) {
+          callback(item);
+        });
+      });
+    })
+    .then(function(item) {
+      assert.propertyVal(item, 'dontPlayGifs', false, 'should be false after second click');
     })
     .then(done)
     .catch(done);

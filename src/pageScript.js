@@ -1,6 +1,7 @@
 // Load options
 var options = {
   dontScrollPosts: false,
+  dontPlayGifs: false,
 };
 
 if (window.vkManagerOptions) {
@@ -47,8 +48,55 @@ var overrideBoardUpdates = function() {
       };
     })();
   }
+
+  if (typeof wall !== 'undefined'
+   && typeof wall.sendReply !== 'undefined'
+   && !window.wallOverrided
+  ) {
+    window.wallOverrided = true;
+
+    wall.sendReply = (function() {
+      var cached_function = wall.sendReply;
+
+      return function() {
+
+        var result = cached_function.apply(this, arguments);
+
+        handleBoardUpdate();
+
+        return result;
+      };
+    })();
+  }
 };
 overrideBoardUpdates();
+
+// Play all gifs available on screen
+var playGifs = function() {
+  if (options.dontPlayGifs) {
+    return 1;
+  }
+
+  var $gifs = document.querySelectorAll('.media_desc.media_desc_soft:not([data-playing])');
+  [].forEach.call($gifs, function($gif) {
+    var $link = $gif.querySelector('a.photo.page_doc_photo_href');
+    if ($link) {
+      var $size = $link.querySelector('.doc_size');
+
+      if ($size && $size.textContent.match(/MB/)) {
+        var size = parseInt($size.textContent, 10);
+
+        if (typeof size === 'number' && size <= 4) {
+          $link.click();
+        } else {
+          // TODO: report error
+        }
+      } else {
+        $link.click();
+      }
+    }
+  });
+};
 
 var discussionBoardRoute = function() {
   // Update the "Discussion Board" to reload on click
@@ -76,6 +124,9 @@ var discussionBoardRoute = function() {
 };
 
 var boardTopicRoute = function() {
+
+  playGifs();
+
   // Update the "Discussion Board" crumb to reload the page on returning
   var $allCrumbs = document.querySelectorAll('.ui_crumb');
 
@@ -101,7 +152,14 @@ var handleRouteChange = function() {
 };
 
 var handleBoardUpdate = function(e) {
+
+  playGifs();
+
   if (options.dontScrollPosts) {
+    return 1;
+  }
+
+  if (!e || !e.events || typeof e.events.forEach !== 'function') {
     return 1;
   }
 
