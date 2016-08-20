@@ -11,7 +11,7 @@ var optionsPage = `chrome-extension://${extensionId}/src/options.html`;
 var driver = null;
 
 describe('src/options.js', function() {
-  this.timeout(15000);
+  this.timeout(25000);
 
   before(function(done) {
     crdv.start();
