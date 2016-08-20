@@ -1,11 +1,14 @@
 {
   "name": "vk-manager",
   "version": "2.0.0",
-  "description": "",
+  "description": "Extensão para o site vk.com",
   "scripts": {
-    "build": "gulp build",
+    "build:chrome": "gulp build:chrome",
+    "build:firefox": "gulp build:firefox",
+    "watch:chrome": "gulp watch:chrome",
+    "watch:firefox": "gulp watch:firefox",
     "lint": "eslint src/**/*.js",
-    "pretest": "npm run build",
+    "pretest": "npm run build:chrome",
     "test": "mocha src/**/*.test.js"
   },
   "author": "Rodrigo Siqueira <knoxzin1@gmail.com>",
@@ -15,6 +18,7 @@
     "chromedriver": "^2.23.1",
     "eslint": "^3.3.1",
     "gulp": "^3.9.1",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "selenium-webdriver": "^2.53.3"
   }

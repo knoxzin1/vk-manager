@@ -4,7 +4,7 @@ var webdriver = require('selenium-webdriver');
 var chai = require('chai');
 var assert = chai.assert;
 
-var extensionPath = path.resolve('./build');
+var extensionPath = path.resolve('./build/chrome');
 var extensionId = 'jbbplengggjdnlghliebnhfbemmfmcjd';
 var optionsPage = `chrome-extension://${extensionId}/src/options.html`;
 
