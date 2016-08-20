@@ -82,6 +82,11 @@ var playGifs = function() {
     var $link = $gif.querySelector('a.photo.page_doc_photo_href');
     if ($link) {
       var $size = $link.querySelector('.doc_size');
+      var $ext = $link.querySelector('.doc_ext');
+
+      if (!$ext || $ext.textContent.toUpperCase() !== 'GIF') {
+        return;
+      }
 
       if ($size && $size.textContent.match(/MB/)) {
         var size = parseInt($size.textContent, 10);
