@@ -39,7 +39,6 @@ var manifest = {
   ],
   'web_accessible_resources': ['src/pageScript.js'],
   'permissions': ['activeTab', 'storage', '*://vk.com/*'],
-  'content_security_policy': 'script-src \'self\' \'unsafe-eval\'; object-src \'self\'; style-src * \'unsafe-inline\'; img-src \'self\' data:;',
 };
 
 gulp.task('build:chrome', ['build:chrome:manifest'], function() {
