@@ -1,6 +1,6 @@
 {
   "name": "vk-manager",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Extensão para o site vk.com",
   "scripts": {
     "build:chrome": "gulp build:chrome",
