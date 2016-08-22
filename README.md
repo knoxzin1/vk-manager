@@ -23,6 +23,15 @@ ou
 
 ## Testes
 
+Copie o arquivo `config.json.example`para `config.json` e configure-o:
+
+- testLogin: Login de alguma conta de teste
+- testPassword: Senha de alguma conta de teste
+- boardLink: Link para "Quadro de discussão" de alguma comunidade da conta acima
+- topicLink: Link de um tópico que a conta tenha acesso, o tópico precisa ter um gif
+
+### Comandos
+
 `npm run lint`
 
 e 
