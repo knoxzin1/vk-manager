@@ -30,6 +30,12 @@ var manifest = {
     'chrome_style': true,
     'page': 'src/options.html'
   },
+  'background': {
+    'scripts': [
+      'src/background.js'
+    ],
+    'persistent': true
+  },
   'content_scripts': [
     {
       'matches': ['*://vk.com/*'],
@@ -38,7 +44,7 @@ var manifest = {
     }
   ],
   'web_accessible_resources': ['src/pageScript.js'],
-  'permissions': ['activeTab', 'storage', '*://vk.com/*'],
+  'permissions': ['activeTab', 'contextMenus', 'storage', '*://vk.com/*'],
 };
 
 gulp.task('build:chrome', ['build:chrome:manifest'], function() {
