@@ -6,8 +6,6 @@ var nconf = require('nconf');
 var assert = chai.assert;
 
 var extensionPath = path.resolve('./build/chrome');
-var extensionId = 'jbbplengggjdnlghliebnhfbemmfmcjd';
-
 var driver = null;
 
 nconf.argv()
@@ -60,7 +58,7 @@ describe('src/pageScript.js', function() {
   });
 
   it('should change the last board crumb to a anchor', function(done) {
-    driver.get(nconf.get('vkManager:boardLink'))
+    driver.get(nconf.get('vkManager:boardLink'));
     driver.wait(webdriver.until.elementLocated(webdriver.By.css('a.ui_crumb:last-child')), 10000);
     var $discussionBoard = driver.findElement(webdriver.By.css('a.ui_crumb:last-child'));
     driver.wait(webdriver.until.elementTextContains($discussionBoard, 'Discussion board'), 10000);
@@ -69,11 +67,11 @@ describe('src/pageScript.js', function() {
   });
 
   it('should change the second crumb onClick attribute', function(done) {
-    driver.get(nconf.get('vkManager:topicLink'))
+    driver.get(nconf.get('vkManager:topicLink'));
 
     driver.findElement(webdriver.By.css('a.ui_crumb:nth-of-type(2)'))
       .getAttribute('onclick')
-      .then(function(attr) {;
+      .then(function(attr) {
         assert.deepEqual(attr, 'return nav.go(this, event);');
       })
       .then(done)
