@@ -13,7 +13,7 @@ nconf.argv()
   .file({ file: './config.json' });
 
 describe('src/pageScript.js', function() {
-  this.timeout(100000);
+  this.timeout(200000);
 
   before(function(done) {
     crdv.start();
@@ -42,7 +42,7 @@ describe('src/pageScript.js', function() {
 
           $submit.click();
 
-          driver.wait(webdriver.until.titleIs('News'), 20000);
+          driver.wait(webdriver.until.titleIs('News'), 40000);
         })
         .then(done)
         .catch(done);
