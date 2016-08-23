@@ -9,7 +9,7 @@ var extensionPath = path.resolve('./build/chrome');
 var driver = null;
 
 nconf.argv()
-  .env()
+  .env('_')
   .file({ file: './config.json' });
 
 describe('src/pageScript.js', function() {
