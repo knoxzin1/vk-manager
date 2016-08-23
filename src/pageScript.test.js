@@ -12,6 +12,7 @@ nconf.argv()
   .env('_')
   .file({ file: './config.json' });
 
+
 describe('src/pageScript.js', function() {
   this.timeout(200000);
 
@@ -45,7 +46,11 @@ describe('src/pageScript.js', function() {
           driver.wait(webdriver.until.titleIs('News'), 40000);
         })
         .then(done)
-        .catch(done);
+        .catch(function() {
+          console.log(driver.getCurrentUrl());
+          console.log(driver.getTitle());
+          done();
+        });
     }, 2000);
   });
 
