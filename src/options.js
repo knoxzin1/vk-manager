@@ -71,7 +71,7 @@ var objectToParam = function(obj) {
 };
 
 var paramToObject = function(param) {
-  return param.split('&').reduce(function(prev, curr, i, arr) {
+  return param.split('&').reduce(function(prev, curr) {
     var p = curr.split('=');
     prev[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
     return prev;
@@ -103,7 +103,7 @@ var checkAccessToken = function() {
       })
       .then(function() {
         $linkUser.href = 'http://vk.com/id' + vkManagerOptions.userID;
-        $linkUser.textContent = vkManagerOptions.firstName + " " + vkManagerOptions.lastName;
+        $linkUser.textContent = vkManagerOptions.firstName + ' ' + vkManagerOptions.lastName;
       });
   }
 };
@@ -123,8 +123,8 @@ var getAccessToken = function() {
 
   var url = 'https://oauth.vk.com/authorize?' + objectToParam(options);
 
-  chrome.tabs.create({url: url}, function(popupWindow) {
-    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  chrome.tabs.create({url: url}, function() {
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
       if (changeInfo.url && redirectMatch.test(changeInfo.url)) {
         var matches = changeInfo.url.match(redirectMatch);
 

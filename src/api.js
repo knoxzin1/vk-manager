@@ -20,3 +20,9 @@ var vkManagerApi = {
     });
   }
 };
+
+if (window) {
+  window.vkManagerApi = vkManagerApi;
+} else if (global) {
+  global.vkManagerApi = vkManagerApi;
+}
