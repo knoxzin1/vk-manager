@@ -91,9 +91,7 @@ var checkAccessToken = function() {
   }
 
   if (hasAccessToken) {
-    var accessToken = vkManagerOptions.accessToken;
-
-    vkManagerApi.getCurrentUser(accessToken)
+    vkManagerApi.getCurrentUser()
       .then(function(user) {
         return saveOptions({
           userID: user.uid,

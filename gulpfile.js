@@ -32,6 +32,7 @@ var manifest = {
   },
   'background': {
     'scripts': [
+      'src/api.js',
       'src/background.js'
     ],
     'persistent': true

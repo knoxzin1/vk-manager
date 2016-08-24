@@ -8,14 +8,44 @@ if (typeof chrome.storage !== 'undefined') {
   });
 }
 
-var uploadImage = function(image) {
+var imageToBlob = function(imageURL) {
+  return new Promise(function(resolve, reject) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var img = new Image;
+    img.src = imageURL;
+    img.onload = function() {
+      canvas.width = this.width;
+      canvas.height = this.height;
+      ctx.drawImage(this, 0, 0);
+
+      if (typeof canvas.toBlob !== 'function') {
+        return false;
+      }
+
+      canvas.toBlob(function(blob) {
+        resolve(blob);
+      });
+    };
+
+    img.onerror = reject;
+  });
 };
 
 chrome.contextMenus.create({
   title: 'Adicionar Foto ao VK',
   contexts: ['image'],
   onclick: function(e) {
+
+    if (!options.accessToken) {
+      // Redirect to options page
+    }
+
     var url = e.srcUrl;
-    console.log(url);
+
+    imageToBlob(url)
+      .then(function(blob) {
+        return vkManagerApi.uploadImage(blob);
+      });
   }
 });
