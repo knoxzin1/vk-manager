@@ -7,11 +7,20 @@
   </head>
   <body>
     <div class="content">
-      <h2>Autorizar acesso a api</h2>
-      <p>
-        A extensão precisa de acesso para fazer o upload de imagens
-      </p>
-      <button id="vkAuthButton">Autorizar acesso</button>
+      <div id="userAuth">
+        <h2>Autorizar acesso a api</h2>
+        <p>
+          A extensão precisa de acesso para fazer o upload de imagens
+        </p>
+        <button id="vkAuthButton">Autorizar acesso</button>
+      </div>
+      <div id="userInfo" style="display: none">
+        <p>
+          <span id="loggedAs">Você está logado como: </span>
+          <a id="linkUser" href="http://vk.com" target="_blank"></a>
+        </p>
+        <button id="linkLogout">Sair</a>
+      </div>
 
       <br /><br />
 
@@ -28,6 +37,7 @@
       </div>
     </div>
 
+    <script src="api.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

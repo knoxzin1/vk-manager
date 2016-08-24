@@ -44,7 +44,7 @@ var manifest = {
     }
   ],
   'web_accessible_resources': ['src/pageScript.js'],
-  'permissions': ['activeTab', 'contextMenus', 'storage', '*://vk.com/*'],
+  'permissions': ['activeTab', 'tabs', 'contextMenus', 'storage', '*://vk.com/*', '*://api.vk.com/*'],
 };
 
 gulp.task('build:chrome', ['build:chrome:manifest'], function() {
