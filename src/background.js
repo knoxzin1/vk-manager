@@ -30,7 +30,7 @@ var createProgressNotification = function(message, progress, cb) {
   }
 };
 
-var updateProgressNotification = function(notificationId, message, progress, cb) {
+var updateProgressNotification = function(notificationId, message, progress) {
   if (typeof chrome.notifications !== 'undefined') {
     chrome.notifications.update(notificationId, {
       title: 'VK Manager',
