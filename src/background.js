@@ -14,6 +14,40 @@ var showNotification = function(message) {
   }
 };
 
+var createProgressNotification = function(message, cb) {
+  if (typeof chrome.notifications !== 'undefined') {
+    chrome.notifications.create({
+      title: 'VK Manager',
+      message: message,
+      type: 'progress',
+      progress: 10,
+      iconUrl: 'images/icon_48.png',
+    }, function(notificationId) {
+      if (typeof cb === 'function') {
+        cb(notificationId);
+      }
+    });
+  }
+};
+
+var updateProgressNotification = function(notificationId, message, progress) {
+  if (typeof chrome.notifications !== 'undefined') {
+    chrome.notifications.update(notificationId, {
+      title: 'VK Manager',
+      message: message,
+      type: 'progress',
+      progress: progress,
+      iconUrl: 'images/icon_48.png',
+    }, function() {
+      // required for chrome -42
+    });
+  }
+};
+
+var closeNotification = function(notificationId) {
+  chrome.notifications.clear(notificationId);
+};
+
 var imageToBlob = function(imageURL) {
   return new Promise(function(resolve, reject) {
     var canvas = document.createElement('canvas');
@@ -52,15 +86,21 @@ chrome.contextMenus.create({
       return false;
     }
 
-    imageToBlob(e.srcUrl)
-      .then(function(blob) {
-        return vkManagerApi.uploadImage(blob);
-      })
-      .then(function() {
-        showNotification('Imagem foi adicionada ao album "VK Manager"');
-      })
-      .catch(function() {
-        showNotification('Erro ao enviar imagem, tente novamente');
-      });
+    var title = 'Preparando para inserir imagem';
+
+    createProgressNotification(title, function(notificationId) {
+      imageToBlob(e.srcUrl)
+        .then(function(blob) {
+          updateProgressNotification(notificationId, title, 20);
+          return vkManagerApi.uploadImage(blob);
+        })
+        .then(function() {
+          updateProgressNotification(notificationId, 'Imagem foi adicionada ao album "VK Manager"', 100);
+        })
+        .catch(function() {
+          closeNotification(notificationId);
+          showNotification('Erro ao enviar imagem, tente novamente');
+        });
+    });
   }
 });
