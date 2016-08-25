@@ -6,7 +6,9 @@
     "nav": true,
     "Board": true,
     "wall": true,
-    "vkManagerApi": true
+    "vkManagerApi": true,
+    "vkmOptions": true,
+    "define": true
   },
   "env": {
     "browser": true,

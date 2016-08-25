@@ -32,6 +32,7 @@ var manifest = {
   },
   'background': {
     'scripts': [
+      'src/options.js',
       'src/api.js',
       'src/background.js'
     ],
@@ -40,7 +41,10 @@ var manifest = {
   'content_scripts': [
     {
       'matches': ['*://vk.com/*'],
-      'js': ['src/contentScript.js'],
+      'js': [
+        'src/options.js',
+        'src/contentScript.js'
+      ],
       'run_at': 'document_end'
     }
   ],

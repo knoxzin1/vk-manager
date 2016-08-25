@@ -1,15 +1,7 @@
 // Load options
-var options = {
-  accessToken: null,
-};
-if (typeof chrome.storage !== 'undefined') {
-  chrome.storage.sync.get(null, function(items) {
-    options = items;
-  });
-}
+vkmOptions.loadOptions();
 
 var showNotification = function(message) {
-
   if (typeof chrome.notifications !== 'undefined') {
     chrome.notifications.create({
       title: 'VK Manager',
@@ -50,7 +42,9 @@ chrome.contextMenus.create({
   title: 'Adicionar Foto ao VK',
   contexts: ['image'],
   onclick: function(e) {
-    if (!options.accessToken) {
+    if (typeof vkmOptions.options.accessToken === 'undefined'
+     || !vkmOptions.options.accessToken
+    ) {
       showNotification('Você precisa dar acesso ao seu album antes de usar essa opção');
       chrome.tabs.create({
         url: 'src/options.html'

@@ -1,12 +1,5 @@
 // Load options
-var options = {
-  accessToken: null,
-};
-if (typeof chrome.storage !== 'undefined') {
-  chrome.storage.sync.get(null, function(items) {
-    options = items;
-  });
-}
+vkmOptions.loadOptions();
 
 var BASE_URL = 'https://api.vk.com/method/';
 var API_VERSION = 5.53;
@@ -26,7 +19,7 @@ var objectToParam = function(obj) {
 var apiCall = function(method, params) {
   params = params || {};
   params.v = API_VERSION;
-  var accessToken = options.accessToken;
+  var accessToken = vkmOptions.options.accessToken;
   params.access_token = accessToken;
 
   return new Promise(function(resolve, reject) {
@@ -124,8 +117,6 @@ var vkManagerApi = {
   }
 };
 
-if (window) {
-  window.vkManagerApi = vkManagerApi;
-} else if (global) {
-  global.vkManagerApi = vkManagerApi;
-}
+if (typeof module != 'undefined') { module.exports = vkManagerApi; }
+else if (typeof define === 'function' && define.amd) { define(vkManagerApi); }
+else { this.vkManagerApi = vkManagerApi; }

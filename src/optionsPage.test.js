@@ -10,7 +10,7 @@ var optionsPage = `chrome-extension://${extensionId}/src/options.html`;
 
 var driver = null;
 
-describe('src/options.js', function() {
+describe('src/optionsPage.js', function() {
   this.timeout(25000);
 
   before(function(done) {
