@@ -11,6 +11,12 @@ var buildSource = [
   '!./src/**/*.test.js',
   '!./build/**',
   '!./build/',
+  '!config.json',
+  '!config.json.example',
+  '!npm-debug.log',
+  '!gulpfile.js',
+  '!README.md',
+  '!package.json'
 ];
 
 var manifest = {
