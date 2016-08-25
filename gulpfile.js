@@ -29,7 +29,10 @@ var manifest = {
   'homepage_url': 'https://github.com/knoxzin1/vk-manager',
 
   'icons': {
+    '16': 'images/icon_16.png',
+    '32': 'images/icon_32.png',
     '48': 'images/icon_48.png',
+    '64': 'images/icon_64.png',
     '128': 'images/icon_128.png'
   },
   'options_ui': {
