@@ -112,6 +112,14 @@ var vkManagerApi = {
 
           return response.json();
         })
+        .then(function(response) {
+          return apiCall('photos.save', {
+            album_id: response.aid,
+            hash: response.hash,
+            photos_list: response.photos_list,
+            server: response.server
+          });
+        })
         .then(resolve)
         .catch(reject);
     });
