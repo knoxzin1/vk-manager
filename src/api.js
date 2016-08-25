@@ -32,10 +32,16 @@ var apiCall = function(method, params) {
   return new Promise(function(resolve, reject) {
     return fetch(BASE_URL + method + '?' + objectToParam(params))
     .then(function(response) {
+      if (!response.ok) {
+        reject('ERROR_CALLING_API');
+      }
       return response.json();
     })
     .then(function(json) {
-      // TODO: handle errors
+      if (json.error) {
+        reject(json.error);
+      }
+
       resolve(json.response);
     })
     .catch(reject);
@@ -107,7 +113,11 @@ var vkManagerApi = {
           });
         })
         .then(function(response) {
-          console.log(response);
+          if (!response.ok) {
+            reject('ERROR_UPLOADING_FILE');
+          }
+
+          return response.json();
         })
         .catch(reject);
     });
