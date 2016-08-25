@@ -46,7 +46,7 @@ var vkmOptions = {
 
 chrome.storage.onChanged.addListener(function(changes) {
   for (var key in changes) {
-    vkmOptions.options[key] = changes[key];
+    vkmOptions.options[key] = changes[key].newValue;
   }
 });
 
