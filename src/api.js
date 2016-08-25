@@ -112,6 +112,7 @@ var vkManagerApi = {
 
           return response.json();
         })
+        .then(resolve)
         .catch(reject);
     });
   }
