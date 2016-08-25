@@ -14,13 +14,13 @@ var showNotification = function(message) {
   }
 };
 
-var createProgressNotification = function(message, cb) {
+var createProgressNotification = function(message, progress, cb) {
   if (typeof chrome.notifications !== 'undefined') {
     chrome.notifications.create({
       title: 'VK Manager',
       message: message,
       type: 'progress',
-      progress: 10,
+      progress: progress,
       iconUrl: 'images/icon_48.png',
     }, function(notificationId) {
       if (typeof cb === 'function') {
@@ -30,7 +30,7 @@ var createProgressNotification = function(message, cb) {
   }
 };
 
-var updateProgressNotification = function(notificationId, message, progress) {
+var updateProgressNotification = function(notificationId, message, progress, cb) {
   if (typeof chrome.notifications !== 'undefined') {
     chrome.notifications.update(notificationId, {
       title: 'VK Manager',
@@ -38,8 +38,10 @@ var updateProgressNotification = function(notificationId, message, progress) {
       type: 'progress',
       progress: progress,
       iconUrl: 'images/icon_48.png',
-    }, function() {
-      // required for chrome -42
+    }, function(wasUpdated) {
+      if (!wasUpdated) {
+        createProgressNotification(message, progress);
+      }
     });
   }
 };
@@ -88,7 +90,7 @@ chrome.contextMenus.create({
 
     var title = 'Preparando para inserir imagem';
 
-    createProgressNotification(title, function(notificationId) {
+    createProgressNotification(title, 10, function(notificationId) {
       imageToBlob(e.srcUrl)
         .then(function(blob) {
           updateProgressNotification(notificationId, title, 20);
