@@ -59,7 +59,7 @@ describe('src/optionsPage.js', function() {
   });
 
   it('should save "dontScrollPosts" to chrome.storage', function(done) {
-
+    this.timeoutsAsyncScript(2000);
     var dontScrollPosts = driver.findElement(webdriver.By.name('dontScrollPosts'));
     dontScrollPosts.click();
 
@@ -90,7 +90,7 @@ describe('src/optionsPage.js', function() {
   });
 
   it('should save "dontPlayGifs" to chrome.storage', function(done) {
-
+    this.timeoutsAsyncScript(2000);
     var dontPlayGifs = driver.findElement(webdriver.By.name('dontPlayGifs'));
     dontPlayGifs.click();
 
