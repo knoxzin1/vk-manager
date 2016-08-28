@@ -149,9 +149,12 @@ var handleRouteChange = function() {
   // See NOTE above
   overrideBoardUpdates();
 
-  if (document.location.pathname.match(/board/)) {
+  var currentLocation = document.location.pathname;
+  var currentQueryString = document.location.search;
+
+  if (/board/.test(currentLocation) && !/\?act=search/.test(currentQueryString)) {
     discussionBoardRoute();
-  } else if (document.location.pathname.match(/topic/)) {
+  } else if (/topic/.test(currentLocation)) {
     boardTopicRoute();
   }
 };
