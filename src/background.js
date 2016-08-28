@@ -1,5 +1,25 @@
 // Load options
-vkmOptions.loadOptions();
+vkmOptions.loadOptions()
+  .then(function() {
+    changeBrowserActionTitle();
+  });
+
+var changeBrowserActionTitle = function() {
+  if (typeof vkmOptions.options.accessToken === 'undefined'
+     || !vkmOptions.options.accessToken
+     || !vkmOptions.options.firstName
+     || !vkmOptions.options.lastName
+  ) {
+    chrome.browserAction.setTitle({
+      title: 'VK Manager'
+    });
+  } else {
+    chrome.browserAction.setTitle({
+      title: 'Logado como:' +
+        (vkmOptions.options.firstName + ' ' + vkmOptions.options.lastName)
+    });
+  }
+};
 
 var showNotification = function(message) {
   if (typeof chrome.notifications !== 'undefined') {
@@ -50,7 +70,7 @@ var closeNotification = function(notificationId) {
   chrome.notifications.clear(notificationId);
 };
 
-var imageToBlob = function(imageURL) {
+var canvasToBlob = function(imageURL) {
   return new Promise(function(resolve, reject) {
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
@@ -74,6 +94,78 @@ var imageToBlob = function(imageURL) {
   });
 };
 
+var imageToBlob = function(imageURL) {
+  if (imageURL.slice(0, 5) === 'data:') {
+    return canvasToBlob(imageURL);
+  } else {
+    return fetch(imageURL).then(function(response) {
+      return response.blob().then(function(imgBlob) {
+        var objectURL = URL.createObjectURL(imgBlob);
+        return canvasToBlob(objectURL);
+      });
+    });
+  }
+};
+
+var objectToParam = function(obj) {
+  var str = '';
+  for (var key in obj) {
+    if (str !== '') {
+      str += '&';
+    }
+    str += key + '=' + encodeURIComponent(obj[key]);
+  }
+
+  return str;
+};
+
+var paramToObject = function(param) {
+  return param.split('&').reduce(function(prev, curr) {
+    var p = curr.split('=');
+    prev[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
+    return prev;
+  }, {});
+};
+
+var getAccessToken = function() {
+  var redirectUri = 'https://oauth.vk.com/blank.html';
+  var redirectMatch = /^https:\/\/oauth.vk.com\/blank.html#(.*)$/i;
+
+  var options = {
+    client_id: 4444599,
+    scope: 'photos,groups,offline',
+    redirect_uri: redirectUri,
+    display: 'popup',
+    v: 5.53,
+    response_type: 'token',
+  };
+
+  var url = 'https://oauth.vk.com/authorize?' + objectToParam(options);
+
+  chrome.tabs.create({url: url}, function() {
+    chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
+      if (changeInfo.url && redirectMatch.test(changeInfo.url)) {
+        var matches = changeInfo.url.match(redirectMatch);
+
+        if (!matches || typeof matches[1] === 'undefined') {
+          return false;
+        }
+
+        chrome.tabs.remove(tabId);
+
+        var response = paramToObject(matches[1]);
+        if (!response.access_token) {
+          return false;
+        }
+
+        vkmOptions.saveOptions({
+          accessToken: response.access_token
+        });
+      }
+    });
+  });
+};
+
 chrome.contextMenus.create({
   title: 'Adicionar Foto ao VK',
   contexts: ['image'],
@@ -82,9 +174,7 @@ chrome.contextMenus.create({
      || !vkmOptions.options.accessToken
     ) {
       showNotification('Você precisa dar acesso ao seu album antes de usar essa opção');
-      chrome.tabs.create({
-        url: 'src/options.html'
-      });
+      getAccessToken();
       return false;
     }
 
@@ -105,4 +195,16 @@ chrome.contextMenus.create({
         });
     });
   }
+});
+
+chrome.browserAction.onClicked.addListener(function() {
+  if (typeof vkmOptions.options.accessToken === 'undefined'
+     || !vkmOptions.options.accessToken
+  ) {
+    getAccessToken();
+  }
+});
+
+chrome.storage.onChanged.addListener(function() {
+  changeBrowserActionTitle();
 });

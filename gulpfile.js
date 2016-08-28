@@ -28,6 +28,9 @@ var manifest = {
   'description': _package.description,
   'homepage_url': 'https://github.com/knoxzin1/vk-manager',
 
+  'browser_action': {
+    'default_title': 'VK Manager'
+  },
   'icons': {
     '16': 'images/icon_16.png',
     '32': 'images/icon_32.png',
@@ -58,7 +61,7 @@ var manifest = {
     }
   ],
   'web_accessible_resources': ['src/pageScript.js'],
-  'permissions': ['activeTab', 'notifications', 'tabs', 'contextMenus', 'storage', '*://vk.com/*', '*://*.vk.com/*', '<all_urls>'],
+  'permissions': ['activeTab', 'notifications', 'contextMenus', 'storage', '*://vk.com/*', '*://*.vk.com/*', '<all_urls>'],
 };
 
 gulp.task('build:chrome', ['build:chrome:manifest'], function() {
