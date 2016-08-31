@@ -1,6 +1,7 @@
 # VK Manager
 
 [![build status](https://img.shields.io/travis/knoxzin1/vk-manager/master.svg?style=flat-square)](https://travis-ci.org/knoxzin1/vk-manager)
+[![Build status](https://ci.appveyor.com/api/projects/status/d5fc977wxepw0h9u/branch/master?svg=true)](https://ci.appveyor.com/project/knoxzin1/vk-manager/branch/master)
 
 Extensão para o site vk.com
 
