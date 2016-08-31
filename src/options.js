@@ -1,5 +1,12 @@
 var vkmOptions = {
-  options: {},
+  options: {
+    dontScrollPosts: false,
+    dontPlayGifs: false,
+    accessToken: null,
+    userID: null,
+    firstName: null,
+    lastName: null,
+  },
   optionsLoaded: false,
   loadOptions: function() {
     return new Promise(function(resolve, reject) {
