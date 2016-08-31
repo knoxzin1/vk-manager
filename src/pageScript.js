@@ -145,7 +145,7 @@ var convertToMarkdown = function() {
   if ($allTexts) {
     [].forEach.call($allTexts, function($text) {
       var normalizedHtml = $text.innerHTML
-        .replace(/(<br\ ?\/?>)+/mg, '\n') // Replace <br /> with \n
+        .replace(/(<br\ ?\/?>)/mg, '\n') // Replace <br /> with \n
         .replace(/^&gt;(.*)$/mg, '> $1'); // Replace &gt with >, blockquote support
 
       $text.innerHTML = marked(normalizedHtml);
