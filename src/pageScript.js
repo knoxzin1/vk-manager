@@ -55,6 +55,20 @@ nav.setLoc = (function() {
   };
 })();
 
+var removeMarkdownBodyClass = function(postId) {
+  var $post = document.querySelector('[id^="post"][id$="' + (postId) + '"]');
+  if (!$post) {
+    return;
+  }
+
+  var $text = $post.querySelector('.bp_text');
+  if (!$text) {
+    return;
+  }
+
+  $text.classList.remove('markdown-body');
+};
+
 // Override Board.checkedUpdates, this is called after every board update
 //
 // NOTE:
@@ -90,6 +104,48 @@ var overrideBoardUpdates = function() {
 
     Pagination.loaded = (function() {
       var cached_function = Pagination.loaded;
+
+      return function() {
+
+        var result = cached_function.apply(this, arguments);
+
+        handleBoardUpdate();
+
+        return result;
+      };
+    })();
+  }
+
+  if (typeof Board !== 'undefined'
+   && typeof Board.editPost !== 'undefined'
+   && !window.editPostOverrided
+  ) {
+    window.editPostOverrided = true;
+
+    Board.editPost = (function() {
+      var cached_function = Board.editPost;
+
+      return function() {
+
+        var result = cached_function.apply(this, arguments);
+
+        if (arguments && arguments.length >= 1) {
+          removeMarkdownBodyClass(arguments[1]);
+        }
+
+        return result;
+      };
+    })();
+  }
+
+  if (typeof Board !== 'undefined'
+   && typeof Board.cancelEditPost !== 'undefined'
+   && !window.cancelEditPostOverrided
+  ) {
+    window.cancelEditPostOverrided = true;
+
+    Board.cancelEditPost = (function() {
+      var cached_function = Board.cancelEditPost;
 
       return function() {
 
