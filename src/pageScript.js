@@ -139,7 +139,11 @@ var convertToMarkdown = function() {
   var $allTexts = document.querySelectorAll('.bp_text:not(.markdown-body)');
   if ($allTexts) {
     [].forEach.call($allTexts, function($text) {
-      $text.innerHTML = marked($text.innerHTML.replace(/(<br\ ?\/?>)+/g, '\n'));
+      var normalizedHtml = $text.innerHTML
+        .replace(/(<br\ ?\/?>)+/mg, '\n') // Replace <br /> with \n
+        .replace(/^&gt;(.*)$/mg, '> $1'); // Replace &gt with >, blockquote support
+
+      $text.innerHTML = marked(normalizedHtml);
       $text.classList.add('markdown-body');
     });
   }
