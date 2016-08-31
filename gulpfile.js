@@ -57,14 +57,31 @@ var manifest = {
         'src/options.js',
         'src/contentScript.js'
       ],
+      'css': [
+        'css/vk.css'
+      ],
       'run_at': 'document_end'
     }
   ],
-  'web_accessible_resources': ['src/pageScript.js'],
+  'web_accessible_resources': ['src/pageScript.js', 'lib/marked.js'],
   'permissions': ['activeTab', 'notifications', 'contextMenus', 'storage', '*://vk.com/*', '*://*.vk.com/*'],
 };
 
-gulp.task('build:chrome', ['build:chrome:manifest'], function() {
+var dependencies = [
+  './node_modules/marked/lib/marked.js',
+];
+
+gulp.task('build:chrome:dependencies', function() {
+  return gulp.src(dependencies)
+    .pipe(gulp.dest('./build/chrome/lib'));
+});
+
+gulp.task('build:firefox:dependencies', function() {
+  return gulp.src(dependencies)
+    .pipe(gulp.dest('./build/firefox/lib'));
+});
+
+gulp.task('build:chrome', ['build:chrome:manifest', 'build:chrome:dependencies'], function() {
   return gulp.src(buildSource)
     .pipe(gulp.dest('./build/chrome'));
 });
@@ -89,7 +106,7 @@ gulp.task('build:chrome:manifest', function(callback) {
   });
 });
 
-gulp.task('build:firefox', ['build:firefox:manifest'], function() {
+gulp.task('build:firefox', ['build:firefox:manifest', 'build:firefox:dependencies'], function() {
   return gulp.src(buildSource)
     .pipe(gulp.dest('./build/firefox'));
 });

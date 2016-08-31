@@ -8,6 +8,25 @@ if (window.vkManagerOptions) {
   options = window.vkManagerOptions;
 }
 
+var renderer = new marked.Renderer();
+
+/*
+ * Override marked default heading code
+ * This will purge the "id" attr from the heading avoiding problems with
+ * existing vk code that uses document.getElementById
+ */
+renderer.heading = function (text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+  return '<h' + level + '>' + text + '</h' + level + '>';
+};
+
+marked.setOptions({
+  renderer: renderer,
+  gfm: true,
+  breaks: true,
+});
+
 // Override nav.setLoc, this is called on every page change
 nav.setLoc = (function() {
   var cached_function = nav.setLoc;
@@ -103,6 +122,16 @@ var playGifs = function() {
   });
 };
 
+var convertToMarkdown = function() {
+  var $allTexts = document.querySelectorAll('.bp_text:not(.markdown-body)');
+  if ($allTexts) {
+    [].forEach.call($allTexts, function($text) {
+      $text.innerHTML = marked($text.innerHTML.replace(/(<br\ ?\/?>)+/g, "\n"));
+      $text.classList.add('markdown-body');
+    });
+  }
+};
+
 var discussionBoardRoute = function() {
   // Update the "Discussion Board" to reload on click
   var $discussionBoard = document.querySelector('.ui_crumb:last-child');
@@ -131,6 +160,7 @@ var discussionBoardRoute = function() {
 var boardTopicRoute = function() {
 
   playGifs();
+  convertToMarkdown();
 
   // Update the "Discussion Board" crumb to reload the page on returning
   var $allCrumbs = document.querySelectorAll('.ui_crumb');
@@ -162,6 +192,7 @@ var handleRouteChange = function() {
 var handleBoardUpdate = function(e) {
 
   playGifs();
+  convertToMarkdown();
 
   if (options.dontScrollPosts) {
     return 1;

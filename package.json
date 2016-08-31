@@ -21,5 +21,8 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "selenium-webdriver": "^2.53.3"
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
   }
 }
