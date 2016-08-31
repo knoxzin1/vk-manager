@@ -2,6 +2,7 @@
 var options = {
   dontScrollPosts: false,
   dontPlayGifs: false,
+  disableMarkdown: false,
 };
 
 if (window.vkManagerOptions) {
@@ -136,6 +137,10 @@ var playGifs = function() {
 };
 
 var convertToMarkdown = function() {
+  if (options.disableMarkdown) {
+    return 1;
+  }
+
   var $allTexts = document.querySelectorAll('.bp_text:not(.markdown-body)');
   if ($allTexts) {
     [].forEach.call($allTexts, function($text) {

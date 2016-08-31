@@ -1,5 +1,6 @@
 var $checkBoxCanScroll = document.getElementById('dontScrollPosts');
 var $checkBoxGifs = document.getElementById('dontPlayGifs');
+var $checkBoxMarkdown = document.getElementById('disableMarkdown');
 var $userInfo = document.getElementById('userInfo');
 var $userAuth = document.getElementById('userAuth');
 var $linkUser = document.getElementById('linkUser');
@@ -50,6 +51,12 @@ vkmOptions.loadOptions()
     $checkBoxGifs.checked = true;
   }
 
+  if (typeof vkmOptions.options.disableMarkdown !== 'undefined'
+   && vkmOptions.options.disableMarkdown === true
+  ) {
+    $checkBoxMarkdown.checked = true;
+  }
+
   $checkBoxCanScroll.addEventListener('change', function() {
     vkmOptions.saveOptions({
       dontScrollPosts: this.checked
@@ -59,6 +66,12 @@ vkmOptions.loadOptions()
   $checkBoxGifs.addEventListener('change', function() {
     vkmOptions.saveOptions({
       dontPlayGifs: this.checked
+    });
+  });
+
+  $checkBoxMarkdown.addEventListener('change', function() {
+    vkmOptions.saveOptions({
+      disableMarkdown: this.checked
     });
   });
 

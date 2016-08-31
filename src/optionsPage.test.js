@@ -119,4 +119,35 @@ describe('src/optionsPage.js', function() {
     .then(done)
     .catch(done);
   });
+
+  it('should save "disableMarkdown" to chrome.storage', function(done) {
+    driver.manage().timeouts().setScriptTimeout(2000);
+    var disableMarkdown = driver.findElement(webdriver.By.name('disableMarkdown'));
+    disableMarkdown.click();
+
+    driver.executeAsyncScript(function() {
+      var callback = arguments[arguments.length - 1];
+      chrome.storage.sync.get('disableMarkdown', function(item) {
+        callback(item);
+      });
+    })
+    .then(function(item) {
+      assert.propertyVal(item, 'disableMarkdown', true, 'should be true after first click');
+    })
+    .then(function() {
+      disableMarkdown.click();
+
+      return driver.executeAsyncScript(function() {
+        var callback = arguments[arguments.length - 1];
+        chrome.storage.sync.get('disableMarkdown', function(item) {
+          callback(item);
+        });
+      });
+    })
+    .then(function(item) {
+      assert.propertyVal(item, 'disableMarkdown', false, 'should be false after second click');
+    })
+    .then(done)
+    .catch(done);
+  });
 });

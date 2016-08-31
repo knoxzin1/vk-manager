@@ -2,6 +2,7 @@ var vkmOptions = {
   options: {
     dontScrollPosts: false,
     dontPlayGifs: false,
+    disableMarkdown: false,
     accessToken: null,
     userID: null,
     firstName: null,
