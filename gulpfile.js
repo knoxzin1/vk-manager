@@ -16,7 +16,8 @@ var buildSource = [
   '!npm-debug.log',
   '!gulpfile.js',
   '!README.md',
-  '!package.json'
+  '!package.json',
+  '!appveyor.yml'
 ];
 
 var manifest = {
