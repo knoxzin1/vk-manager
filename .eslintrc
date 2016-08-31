@@ -8,7 +8,9 @@
     "wall": true,
     "vkManagerApi": true,
     "vkmOptions": true,
-    "define": true
+    "define": true,
+    "marked": true,
+    "Pagination": true
   },
   "env": {
     "browser": true,

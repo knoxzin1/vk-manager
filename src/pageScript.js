@@ -16,8 +16,6 @@ var renderer = new marked.Renderer();
  * existing vk code that uses document.getElementById
  */
 renderer.heading = function (text, level) {
-  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-
   return '<h' + level + '>' + text + '</h' + level + '>';
 };
 
@@ -126,7 +124,7 @@ var convertToMarkdown = function() {
   var $allTexts = document.querySelectorAll('.bp_text:not(.markdown-body)');
   if ($allTexts) {
     [].forEach.call($allTexts, function($text) {
-      $text.innerHTML = marked($text.innerHTML.replace(/(<br\ ?\/?>)+/g, "\n"));
+      $text.innerHTML = marked($text.innerHTML.replace(/(<br\ ?\/?>)+/g, '\n'));
       $text.classList.add('markdown-body');
     });
   }
