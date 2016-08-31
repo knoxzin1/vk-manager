@@ -27,6 +27,13 @@ renderer.image = function(href, title, text) {
   return text;
 };
 
+/*
+ * Disable links - Vk has built in support
+ */
+renderer.link = function(href, title, text) {
+  return text;
+};
+
 marked.setOptions({
   renderer: renderer,
   gfm: true,
