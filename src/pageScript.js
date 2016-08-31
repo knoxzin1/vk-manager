@@ -260,7 +260,10 @@ var handleRouteChange = function() {
   var currentLocation = document.location.pathname;
   var currentQueryString = document.location.search;
 
-  if (/board/.test(currentLocation) && !/\?act=search/.test(currentQueryString)) {
+  if (/board/.test(currentLocation)
+   && !/\?act=search/.test(currentQueryString)
+   && !/\?act=create/.test(currentQueryString)
+  ) {
     discussionBoardRoute();
   } else if (/topic/.test(currentLocation)) {
     boardTopicRoute();
