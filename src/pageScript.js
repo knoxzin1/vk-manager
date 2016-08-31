@@ -19,6 +19,14 @@ renderer.heading = function (text, level) {
   return '<h' + level + '>' + text + '</h' + level + '>';
 };
 
+/*
+ * Disable images, since vk will convert the image link to an anchor the script
+ * will not work
+ */
+renderer.image = function(href, title, text) {
+  return text;
+};
+
 marked.setOptions({
   renderer: renderer,
   gfm: true,
