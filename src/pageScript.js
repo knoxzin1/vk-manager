@@ -68,14 +68,14 @@ var overrideBoardUpdates = function() {
     })();
   }
 
-  if (typeof wall !== 'undefined'
-   && typeof wall.sendReply !== 'undefined'
-   && !window.wallOverrided
+  if (typeof Pagination !== 'undefined'
+   && typeof Pagination.loaded !== 'undefined'
+   && !window.paginationOverrided
   ) {
-    window.wallOverrided = true;
+    window.paginationOverrided = true;
 
-    wall.sendReply = (function() {
-      var cached_function = wall.sendReply;
+    Pagination.loaded = (function() {
+      var cached_function = Pagination.loaded;
 
       return function() {
 
