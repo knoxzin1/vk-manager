@@ -2,6 +2,8 @@
 
 [![build status](https://img.shields.io/travis/knoxzin1/vk-manager/master.svg?style=flat-square)](https://travis-ci.org/knoxzin1/vk-manager)
 [![Build status](https://ci.appveyor.com/api/projects/status/d5fc977wxepw0h9u/branch/master?svg=true)](https://ci.appveyor.com/project/knoxzin1/vk-manager/branch/master)
+[![dependencies Status](https://david-dm.org/knoxzin1/vk-manager/status.svg)](https://david-dm.org/knoxzin1/vk-manager)
+[![devDependencies Status](https://david-dm.org/knoxzin1/vk-manager/dev-status.svg)](https://david-dm.org/knoxzin1/vk-manager?type=dev)
 
 Extensão para o site vk.com
 
