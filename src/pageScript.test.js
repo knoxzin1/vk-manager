@@ -47,8 +47,8 @@ describe('src/pageScript.js', function() {
         })
         .then(done)
         .catch(function() {
-          console.log(driver.getCurrentUrl());
-          console.log(driver.getTitle());
+          driver.getCurrentUrl().then(console.log.bind(console));
+          driver.getTitle().then(console.log.bind(console));
           done();
         });
     }, 2000);
