@@ -43,7 +43,20 @@ describe('src/pageScript.js', function() {
 
           $submit.click();
 
-          driver.wait(webdriver.until.titleIs('News'), 40000);
+          driver.sleep(10000);
+
+          return driver.getTitle();
+        })
+        .then((title) => {
+          if (title === 'Security Check') {
+            var $code = driver.findElement(webdriver.By.id('code'));
+            var $submit = driver.findElement(webdriver.By.id('validate_btn'));
+
+            $code.sendKeys(nconf.get('vkManager:testPhone'));
+            $submit.click();
+          }
+
+          driver.wait(webdriver.until.titleIs('News'), 10000);
         })
         .then(done)
         .catch(function() {

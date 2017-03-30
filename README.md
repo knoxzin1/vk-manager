@@ -30,6 +30,7 @@ Copie o arquivo `config.json.example`para `config.json` e configure-o:
 
 - testLogin: Login de alguma conta de teste
 - testPassword: Senha de alguma conta de teste
+- testPhone: Telefone da conta menos ddi e os dois ultimos digitos
 - boardLink: Link para "Quadro de discussão" de alguma comunidade da conta acima
 - topicLink: Link de um tópico que a conta tenha acesso, o tópico precisa ter um gif
 
