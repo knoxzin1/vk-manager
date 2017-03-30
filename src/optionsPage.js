@@ -1,3 +1,5 @@
+var vkmOptions = this.vkmOptions;
+
 var $checkBoxCanScroll = document.getElementById('dontScrollPosts');
 var $checkBoxGifs = document.getElementById('dontPlayGifs');
 var $checkBoxMarkdown = document.getElementById('disableMarkdown');

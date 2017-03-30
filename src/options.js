@@ -24,10 +24,13 @@ var vkmOptions = {
           reject(chrome.runtime.lastError);
         }
 
-        vkmOptions.options = items;
+        if (items) {
+          vkmOptions.options = items;
+        }
+
         vkmOptions.optionsLoaded = true;
 
-        resolve(items);
+        resolve(vkmOptions.options);
       });
     });
   },

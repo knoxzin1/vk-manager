@@ -1,4 +1,5 @@
 // Load options
+var vkmOptions = this.vkmOptions;
 vkmOptions.loadOptions();
 
 var BASE_URL = 'https://api.vk.com/method/';

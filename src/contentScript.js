@@ -1,4 +1,5 @@
 // Load options
+var vkmOptions = this.vkmOptions;
 vkmOptions.loadOptions()
 .then(function() {
   var options = vkmOptions.options;

@@ -1,4 +1,5 @@
 // Load options
+var vkmOptions = this.vkmOptions;
 vkmOptions.loadOptions()
   .then(function() {
     changeBrowserActionTitle();
@@ -144,6 +145,7 @@ var getAccessToken = function() {
 
   chrome.tabs.create({url: url}, function() {
     chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
+      console.log(tabId, changeInfo);
       if (changeInfo.url && redirectMatch.test(changeInfo.url)) {
         var matches = changeInfo.url.match(redirectMatch);
 
