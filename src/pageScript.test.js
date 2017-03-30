@@ -48,7 +48,8 @@ describe('src/pageScript.js', function() {
           return driver.getTitle();
         })
         .then((title) => {
-          if (title === 'Security Check') {
+          console.log(title);
+          if (title.trim() === 'Security Check') {
             var $code = driver.findElement(webdriver.By.id('code'));
             var $submit = driver.findElement(webdriver.By.id('validate_btn'));
 
