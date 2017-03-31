@@ -1,6 +1,6 @@
 const path = require('path');
 const crdv = require('chromedriver');
-const {Builder, By, promise, until} = require('selenium-webdriver');
+const {Builder, By, promise} = require('selenium-webdriver');
 const chai = require('chai');
 const assert = chai.assert;
 
@@ -88,7 +88,7 @@ describe('src/optionsPage.js', function() {
       chrome.storage.sync.get('dontPlayGifs', function(item) {
         callback(item);
       });
-    })
+    });
     assert.propertyVal(chk1, 'dontPlayGifs', true, 'should be true after first click');
 
     await dontPlayGifs.click();
@@ -112,7 +112,7 @@ describe('src/optionsPage.js', function() {
       chrome.storage.sync.get('disableMarkdown', function(item) {
         callback(item);
       });
-    })
+    });
     assert.propertyVal(chk1, 'disableMarkdown', true, 'should be true after first click');
 
     await disableMarkdown.click();
