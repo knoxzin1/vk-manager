@@ -69,6 +69,8 @@ describe('src/pageScript.js', function() {
 
   it('should change the last board crumb to a anchor', async function() {
     await driver.get(nconf.get('vkManager:boardLink'));
+    await timeout(1000);
+
     await driver.wait(until.elementLocated(By.css('a.ui_crumb:last-child')), 10000);
     var $discussionBoard = await driver.findElement(By.css('a.ui_crumb:last-child'));
     await driver.wait(until.elementTextContains($discussionBoard, 'Discussion board'), 10000);
@@ -76,6 +78,7 @@ describe('src/pageScript.js', function() {
 
   it('should change the second crumb onClick attribute', async function() {
     await driver.get(nconf.get('vkManager:topicLink'));
+    await timeout(1000);
 
     const attr = await driver.findElement(By.css('a.ui_crumb:nth-of-type(2)'))
                 .getAttribute('onclick');
@@ -85,6 +88,7 @@ describe('src/pageScript.js', function() {
 
   it('should play all gifs showing on the page', async function() {
     await driver.get(nconf.get('vkManager:topicLink'));
+    await timeout(1000);
 
     const docs = await driver.findElements(By.css('.photo.page_doc_photo_href'));
     const isDisplayedArr = await Promise.all(docs.map(function(doc) {
