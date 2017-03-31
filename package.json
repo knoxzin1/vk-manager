@@ -20,6 +20,7 @@
     "gulp": "^3.9.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
+    "nconf": "^0.8.4",
     "selenium-webdriver": "^3.3.0"
   },
   "dependencies": {
