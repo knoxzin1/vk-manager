@@ -37,6 +37,7 @@ var manifest = {
     '32': 'images/icon_32.png',
     '48': 'images/icon_48.png',
     '64': 'images/icon_64.png',
+    '96': 'images/icon_96.png',
     '128': 'images/icon_128.png'
   },
   'options_ui': {
@@ -49,7 +50,6 @@ var manifest = {
       'src/api.js',
       'src/background.js'
     ],
-    'persistent': true
   },
   'content_scripts': [
     {
@@ -94,9 +94,10 @@ gulp.task('watch:chrome', function() {
 gulp.task('build:chrome:manifest', function(callback) {
 
   mkdirp('./build/chrome/', function() {
-    var chromeManifest = manifest;
+    var chromeManifest = JSON.parse(JSON.stringify(manifest));
 
     chromeManifest.key = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAssvXLlOjudWEp22GcBJgtdwJ62xP5vp3Uwy9v1XqLtoS5UFtaTGD5DFdQSHsPyrRNfdxzAjxrP98Q8/sk7Ys6a14MYuN6f839rHis3G+L5zduccmr714OUUARAS8AOBQb74PamAzdhXymG1qpad7saTsvqakclkb+AjVbs2hkhSOvxuNI63X1KAN7rki/w6yhv5GoBvLwkJQpPmjfMIXisOmsbElM8njRTv3+6F5EszqxTFJn2fRt7ucB10tRH7MUXNlbmMwYnvQDJkY6lb0rAMV/N0wsvX6kluakYWeQozNjNO2ayD9tQ7/CVMAc/DQXQeqWlcl39AXK3hQz0ePLQIDAQAB';
+    chromeManifest.background.persistent = true;
 
     fs.writeFile(
       './build/chrome/manifest.json',
@@ -119,13 +120,17 @@ gulp.task('watch:firefox', function() {
 gulp.task('build:firefox:manifest', function(callback) {
 
   mkdirp('./build/firefox/', function() {
-    var firefoxManifest = manifest;
+    var firefoxManifest = JSON.parse(JSON.stringify(manifest));
 
     firefoxManifest.applications = {
       gecko: {
         id: 'extension@vk.manager',
       },
     };
+
+    firefoxManifest.permissions.push('tabs');
+
+    firefoxManifest.browser_action.default_icon = manifest.icons;
 
     fs.writeFile(
       './build/firefox/manifest.json',
