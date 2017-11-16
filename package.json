@@ -7,6 +7,7 @@
     "build:firefox": "gulp build:firefox",
     "watch:chrome": "gulp watch:chrome",
     "watch:firefox": "gulp watch:firefox",
+    "start:firefox": "web-ext run --source-dir ./build/firefox/",
     "lint": "eslint src/**/*.js",
     "pretest": "npm run build:chrome",
     "test": "mocha src/**/*.test.js"
@@ -21,7 +22,8 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.0.2",
     "nconf": "^0.8.4",
-    "selenium-webdriver": "^3.3.0"
+    "selenium-webdriver": "^3.3.0",
+    "web-ext": "^2.2.2"
   },
   "dependencies": {
     "8fold-marked": "^0.3.8"
