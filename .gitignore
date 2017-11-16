@@ -7,3 +7,4 @@ build/
 dev/
 tmp/
 config.json
+web-ext-artifacts/
