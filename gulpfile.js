@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var _package = require('./package.json')
+var _package = require('./package.json');
 
 var buildSource = [
   './**',
