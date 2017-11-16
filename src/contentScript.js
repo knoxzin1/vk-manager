@@ -16,7 +16,7 @@ vkmOptions.loadOptions()
     // Load dependencies
     var s = document.createElement('script');
     s.type = 'text/javascript';
-    s.src = chrome.extension.getURL('lib/marked.js');
+    s.src = chrome.extension.getURL('lib/marked.min.js');
     s.onload = function() {
       this.parentNode.removeChild(this);
 

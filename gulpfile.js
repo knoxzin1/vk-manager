@@ -64,7 +64,7 @@ var manifest = {
       'run_at': 'document_end'
     }
   ],
-  'web_accessible_resources': ['src/pageScript.js', 'lib/marked.js'],
+  'web_accessible_resources': ['src/pageScript.js', 'lib/marked.min.js'],
   'permissions': ['activeTab', 'notifications', 'contextMenus', 'storage', '*://vk.com/*', '*://*.vk.com/*'],
 };
 
