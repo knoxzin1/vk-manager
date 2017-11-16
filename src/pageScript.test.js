@@ -18,7 +18,7 @@ function timeout(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-describe('src/pageScript.js', function() {
+describe.skip('src/pageScript.js', function() {
   this.timeout(50000);
 
   before(async function() {
