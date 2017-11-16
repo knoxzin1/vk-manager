@@ -69,7 +69,7 @@ var manifest = {
 };
 
 var dependencies = [
-  './node_modules/marked/lib/marked.js',
+  './node_modules/8fold-marked/marked.min.js',
 ];
 
 gulp.task('build:chrome:dependencies', function() {

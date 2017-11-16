@@ -24,6 +24,6 @@
     "selenium-webdriver": "^3.3.0"
   },
   "dependencies": {
-    "marked": "^0.3.6"
+    "8fold-marked": "^0.3.8"
   }
 }
