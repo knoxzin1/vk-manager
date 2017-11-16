@@ -36,9 +36,7 @@ var checkAccessToken = function() {
   }
 };
 
-vkmOptions.loadOptions()
-.then(function() {
-
+vkmOptions.loadOptions().then(function() {
   checkAccessToken();
 
   if (typeof vkmOptions.options.dontScrollPosts !== 'undefined'
@@ -80,8 +78,7 @@ vkmOptions.loadOptions()
   $linkLogout.addEventListener('click', function() {
     vkmOptions.saveOptions({
       accessToken: null
-    })
-    .then(checkAccessToken);
+    }).then(checkAccessToken);
   });
 });
 

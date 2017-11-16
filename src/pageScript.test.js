@@ -81,7 +81,7 @@ describe.skip('src/pageScript.js', function() {
     await timeout(1000);
 
     const attr = await driver.findElement(By.css('a.ui_crumb:nth-of-type(2)'))
-                .getAttribute('onclick');
+      .getAttribute('onclick');
 
     assert.deepEqual(attr, 'return nav.go(this, event);');
   });

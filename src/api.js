@@ -25,20 +25,20 @@ var apiCall = function(method, params) {
 
   return new Promise(function(resolve, reject) {
     return fetch(BASE_URL + method + '?' + objectToParam(params))
-    .then(function(response) {
-      if (!response.ok) {
-        reject('ERROR_CALLING_API');
-      }
-      return response.json();
-    })
-    .then(function(json) {
-      if (json.error) {
-        reject(json.error);
-      }
+      .then(function(response) {
+        if (!response.ok) {
+          reject('ERROR_CALLING_API');
+        }
+        return response.json();
+      })
+      .then(function(json) {
+        if (json.error) {
+          reject(json.error);
+        }
 
-      resolve(json.response);
-    })
-    .catch(reject);
+        resolve(json.response);
+      })
+      .catch(reject);
   });
 };
 
